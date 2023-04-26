@@ -1,0 +1,17 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    command: redis-server
+    container_name: redis
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 6379:6379
+    
+  webserver:
+    image: dhanushkamath/disml-fastapi-1.0.2
+    depends_on:
+      - redis
+    ports:
+      - 8000:8000
